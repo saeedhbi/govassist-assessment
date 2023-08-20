@@ -24,16 +24,12 @@ class GetURLShortenAction
      */
     public function __invoke(Request $request): RedirectResponse|JsonResponse
     {
-        try {
-            $dto = new GetURLShortenDTO();
+        $dto = new GetURLShortenDTO();
 
-            $dto->slug = $request->path();
+        $dto->slug = $request->path();
 
-            $dto = $this->getURLShortenService->process($dto);
+        $dto = $this->getURLShortenService->process($dto);
 
-            return $this->getURLShortenResponder->response($dto);
-        } catch (\Exception $exception) {
-            return $this->getURLShortenResponder->error($exception);
-        }
+        return $this->getURLShortenResponder->response($dto);
     }
 }

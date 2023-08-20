@@ -2,6 +2,7 @@
 
 namespace Packages\URLShortener\Actions;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Packages\URLShortener\DTOs\PostURLShortenDTO;
@@ -19,23 +20,19 @@ class PostURLShortenAction
 
     /**
      * @param Request $request
-     * @return JsonResponse
+     * @return RedirectResponse|JsonResponse
      */
-    public function __invoke(Request $request): JsonResponse
+    public function __invoke(Request $request): RedirectResponse|JsonResponse
     {
-        try {
-            $this->_validate($request);
+        $this->_validate($request);
 
-            $dto = new PostURLShortenDTO();
+        $dto = new PostURLShortenDTO();
 
-            $dto->destination = $request->input('destination');
+        $dto->destination = $request->input('destination');
 
-            $dto = $this->postURLShortenService->process($dto);
+        $dto = $this->postURLShortenService->process($dto);
 
-            return $this->postURLShortenResponder->response($dto);
-        } catch (\Exception $exception) {
-            return $this->postURLShortenResponder->error($exception);
-        }
+        return $this->postURLShortenResponder->response($dto);
     }
 
     /**

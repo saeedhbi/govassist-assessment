@@ -10,9 +10,9 @@ use Packages\URLShortener\Models\URL;
 class URLRepository implements URLRepositoryInterface
 {
 
-    public function getAll(): Collection
+    public function getAll()
     {
-        return URL::all();
+        return URL::latest();
     }
 
     public function findEntityById($id)

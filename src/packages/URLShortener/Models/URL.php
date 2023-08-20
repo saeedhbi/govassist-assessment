@@ -4,6 +4,7 @@ namespace Packages\URLShortener\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\URL as URLAlias;
 
 class URL extends Model
 {
@@ -18,4 +19,9 @@ class URL extends Model
         'slug',
         'visits',
     ];
+
+    public function getShortenedUrlAttribute(): string
+    {
+        return URLAlias::to($this->slug);
+    }
 }

@@ -23,7 +23,7 @@ class PostURLShortenService implements ServiceInterface
             'visits' => 0
         ]);
 
-        $dto->response->shortened_url = URL::to($dto->response->slug);
+        $dto->response->shortened_url = $dto->response->getShortenedUrlAttribute();
 
         return $dto;
     }

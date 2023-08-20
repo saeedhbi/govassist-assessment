@@ -4,23 +4,27 @@ namespace Packages\URLShortener\Responders;
 
 use App\Interfaces\DtoInterface;
 use App\Interfaces\ResponseInterface;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Validation\ValidationException;
 use Packages\URLShortener\DTOs\PostURLShortenDTO;
 
 class PostURLShortenResponder implements ResponseInterface
 {
-    public function response(PostURLShortenDTO|DtoInterface $dto, $status = 200): JsonResponse
+    /**
+     * @param PostURLShortenDTO|DtoInterface $dto
+     * @param int $status
+     * @return RedirectResponse|JsonResponse
+     */
+    public function response(PostURLShortenDTO|DtoInterface $dto, int $status = 200): RedirectResponse|JsonResponse
     {
-        return response()->json($dto->response)->setStatusCode($status);
-    }
-
-    public function error(\Exception $exception): JsonResponse
-    {
-        if ($exception instanceof ValidationException) {
-            return response()->json($exception->errors())->setStatusCode(422);
+        /**
+         * Since the "Inertia" is acting differently from a simple API calling, we don't need to respond JSON,
+         * but otherwise, it will be responded as JSON.
+         */
+        if (boolval(request()->header('X-Inertia')) === true) {
+            return back();
         }
 
-        return response()->json($exception->getMessage())->setStatusCode(500);
+        return response()->json($dto->response)->setStatusCode($status);
     }
 }

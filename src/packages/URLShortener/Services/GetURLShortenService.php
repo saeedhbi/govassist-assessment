@@ -25,6 +25,8 @@ class GetURLShortenService implements ServiceInterface
             throw new NotFoundHttpException("URL not found");
         }
 
+        $this->urlRepository->incrementVisits($url);
+
         $dto->response = $url->destination;
 
         return $dto;
