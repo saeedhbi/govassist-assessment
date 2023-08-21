@@ -100,6 +100,10 @@ It provides a convenient way to execute various tasks efficiently.
 
 Navigate to your project's root directory in the terminal and use the following commands:
 
+- Set .env file inside `src` folder
+- Run `make init` to install, build and run the project
+- Navigate to URL that set in .env
+
 ### Initialize the Project
 
 ```bash
