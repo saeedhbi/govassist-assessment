@@ -33,7 +33,7 @@ class GetURLShortenServiceTest extends TestCase
             'visits' => 0,
         ]);
 
-        // Mock the createEntity method of the repository
+        // Mock the findFirstBy method of the repository
         $repositoryMock->expects($this->once())
             ->method('findFirstBy')
             ->willReturn($entity);
@@ -58,7 +58,7 @@ class GetURLShortenServiceTest extends TestCase
     /** @test */
     public function it_will_throw_error_on_invalid_slug(): void
     {
-        // Mock the URLRepositoryInterface
+        // Mock the URLRepository
         $repositoryMock = $this->createMock(URLRepository::class);
 
         // Create an instance of the service with the mock
@@ -68,7 +68,7 @@ class GetURLShortenServiceTest extends TestCase
         $dto = new GetURLShortenDTO();
         $dto->slug = '12345';
 
-        // Mock the createEntity method of the repository
+        // Mock the findFirstBy method of the repository
         $repositoryMock->expects($this->once())
             ->method('findFirstBy')
             ->willReturn(null);
