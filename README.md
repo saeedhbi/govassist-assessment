@@ -103,6 +103,8 @@ Navigate to your project's root directory in the terminal and use the following 
 - Set .env file inside `src` folder
 - Run `make init` to install, build and run the project
 - Navigate to URL that set in .env
+- Register a user from Register page
+- You can now access to authenticated URLs in dashboard urls
 
 ### Initialize the Project
 
