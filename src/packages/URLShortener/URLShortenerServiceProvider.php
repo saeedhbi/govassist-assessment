@@ -40,6 +40,6 @@ class URLShortenerServiceProvider extends ServiceProvider
 
     private function _scheduleCommands(Schedule $schedule): void
     {
-        $schedule->command(DeleteUnvisitedLinks::COMMAND)->daily()->runInBackground();
+        $schedule->command(DeleteUnvisitedLinks::COMMAND)->everyMinute();
     }
 }

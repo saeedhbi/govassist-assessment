@@ -6,7 +6,8 @@ RUN rm -rf /var/lib/apt/lists/* \
     git \
     libzip-dev \
     zip \
-    unzip
+    unzip \
+    cron
 
 RUN docker-php-ext-configure \
     zip \

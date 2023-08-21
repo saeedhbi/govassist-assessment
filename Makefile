@@ -25,6 +25,9 @@ build:
 watch:
 	docker-compose exec -u www-data front yarn dev
 
+test:
+	docker-compose exec -u www-data front php artisan test
+
 install:
 	docker-compose exec -u www-data front composer install
 	docker-compose exec -u www-data front yarn install

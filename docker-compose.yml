@@ -11,6 +11,9 @@ services:
 
   front:
     build: ./docker/php
+    depends_on:
+      - mariadb
+      - nginx
     volumes:
       - ./src:/var/www/src
 
